@@ -9,11 +9,17 @@ document.getElementById("chat-close").onclick = function () {
 };
 
 // Send message on click
-document.getElementById("chat-send").onclick = sendMessage;
+document.getElementById("chat-send").onclick = function(e){
+    e.preventDefault();
+    sendMessage();
+};
 
 // Send message on Enter
 document.getElementById("chat-input").addEventListener("keypress", function (e) {
-    if (e.key === "Enter") sendMessage();
+    if (e.key === "Enter") {
+        e.preventDefault();   // 🔥 prevents form submit
+        sendMessage();
+    }
 });
 
 // ================= MAIN FUNCTION =================
@@ -31,7 +37,7 @@ async function sendMessage() {
 
     try {
 
-        const response = await ffetch("https://ghpskambipura.onrender.com/chat", {
+        const response = await fetch("https://ghpskambipura.onrender.com/chat", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -76,4 +82,3 @@ function removeTyping() {
     let typing = document.querySelector(".typing");
     if (typing) typing.remove();
 }
-
