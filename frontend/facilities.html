@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>GHPS Kambipura | Facilities</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="chatbot.css" />
+
+</head>
+
+<body>
+
+    <!-- ================= WHITE NAVBAR ================= -->
+    <header class="navbar">
+        <div class="nav-container">
+
+            <!-- LOGO -->
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="logo-text">
+                    <h3>GHPS Kambipura</h3>
+                </div>
+            </div>
+
+            <!-- HAMBURGER -->
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+
+            <!-- NAV MENU -->
+            <nav id="navMenu">
+                <a class="active" href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="facilities.html">Facilities</a>
+                <a href="schemes.html">Schemes</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+
+        </div>
+    </header>
+    <!-- FACILITIES SECTION -->
+    <section class="facilities">
+        <h1>Our Facilities</h1>
+        <p class="subtitle">
+            We provide a supportive environment with essential amenities to foster learning and growth.
+        </p>
+
+        <div class="facilities-grid">
+
+            <div class="facility-card">
+                <div class="facility-icon blue">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <h3>Academic Excellence</h3>
+                <p>
+                    Classes from Grade 1 to Grade 7 following the state curriculum with a focus on holistic development.
+                </p>
+            </div>
+
+            <div class="facility-card">
+                <div class="facility-icon pink">
+                    <i class="fas fa-child"></i>
+                </div>
+                <h3>Anganwadi on Campus</h3>
+                <p>
+                    Early childhood care and education integrated within the school campus.
+                </p>
+            </div>
+
+            <div class="facility-card">
+                <div class="facility-icon green">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <h3>Qualified Staff</h3>
+                <p>
+                    5 permanent teachers and 1 guest teacher dedicated to student success.
+                </p>
+            </div>
+
+            <div class="facility-card">
+                <div class="facility-icon orange">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <h3>Nutritious Meals</h3>
+                <p>
+                    Freshly cooked mid-day meals to ensure student health and focus.
+                </p>
+            </div>
+
+            <div class="facility-card">
+                <div class="facility-icon yellow">
+                    <i class="fas fa-school"></i>
+                </div>
+                <h3>Spacious Campus</h3>
+                <p>
+                    Clean and safe environment for learning and outdoor activities.
+                </p>
+            </div>
+
+            <div class="facility-card">
+                <div class="facility-icon purple">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Safe Environment</h3>
+                <p>
+                    Secure premises with dedicated non-teaching staff.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+    <!-- ================= CHATBOT ================= -->
+
+    <!-- Chatbot Logo -->
+    <div id="chat-logo">
+        <img src="images/Chatbot.jpg" alt="School Logo">
+    </div>
+
+    <!-- Chat Window -->
+    <div id="chat-container">
+
+        <div id="chat-header">
+            🎓 School AI Assistant
+            <span id="chat-close">✖</span>
+        </div>
+
+        <div id="chat-messages">
+            <div class="bot-message">
+                Hello 👋<br>
+                Welcome to Government Higher Primary School, Kambipura.<br>
+                How can I help you?
+            </div>
+        </div>
+
+        <div id="chat-input-area">
+            <div id="chat-input-row">
+                <input type="text" id="chat-input" placeholder="Ask anything about school...">
+                <button id="chat-send">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <!-- Footer -->
+    <div id="footer"></div>
+    <script src="include.js"></script>
+    <script>
+        // MOBILE MENU TOGGLE
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const menuToggle = document.getElementById("menuToggle");
+            const navMenu = document.getElementById("navMenu");
+
+            if (menuToggle) {
+                menuToggle.addEventListener("click", function () {
+                    navMenu.classList.toggle("active");
+                });
+            }
+
+        });
+    </script>
+
+    <!-- Chatbot JS -->
+    <script src="chatbot.js"></script>
+
+</body>
+
+</html>

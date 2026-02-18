@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Government & NGO Benefits | GHPS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="chatbot.css" />
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="nav-container">
+
+            <!-- LOGO -->
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="logo-text">
+                    <h3>GHPS Kambipura</h3>
+                </div>
+            </div>
+
+            <!-- HAMBURGER -->
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+
+            <!-- NAV MENU -->
+            <nav id="navMenu">
+                <a class="active" href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="facilities.html">Facilities</a>
+                <a href="schemes.html">Schemes</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+
+        </div>
+    </header>
+
+    <!-- ================= SCHEMES ================= -->
+    <section class="schemes">
+        <h1>Government & NGO Benefits</h1>
+        <p class="subtitle">
+            Ensuring no child is left behind through government schemes and NGO partnerships.
+        </p>
+
+        <div class="schemes-grid">
+
+            <div class="scheme-card">
+                <div class="scheme-icon orange">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <div>
+                    <h3>Free Mid-day Meals</h3>
+                    <span class="tag">By: Government</span>
+                </div>
+            </div>
+
+            <div class="scheme-card">
+                <div class="scheme-icon pink">
+                    <i class="fas fa-apple-alt"></i>
+                </div>
+                <div>
+                    <h3>Nutritious Diet (Eggs & Bananas)</h3>
+                    <span class="tag">By: Azim Premji Foundation</span>
+                </div>
+            </div>
+
+            <div class="scheme-card">
+                <div class="scheme-icon yellow">
+                    <i class="fas fa-mug-hot"></i>
+                </div>
+                <div>
+                    <h3>Morning Breakfast Scheme</h3>
+                    <span class="tag">By: Sathya Sai Annapoorna Trust</span>
+                </div>
+            </div>
+
+            <div class="scheme-card">
+                <div class="scheme-icon blue">
+                    <i class="fas fa-tshirt"></i>
+                </div>
+                <div>
+                    <h3>Free Uniforms</h3>
+                    <span class="tag">By: Government</span>
+                </div>
+            </div>
+
+            <div class="scheme-card">
+                <div class="scheme-icon gray">
+                    <i class="fas fa-shoe-prints"></i>
+                </div>
+                <div>
+                    <h3>Free Shoes & Socks</h3>
+                    <span class="tag">By: Government</span>
+                </div>
+            </div>
+
+            <a href="https://textbooks.karnataka.gov.in/textbooks/en/1000enenenen" class="scheme-card link-card">
+
+                <div class="scheme-icon green">
+                    <i class="fas fa-book"></i>
+                </div>
+
+                <div>
+                    <h3>Free Textbooks</h3>
+                    <span class="tag">By: Government</span>
+                </div>
+
+            </a>
+
+
+            <div class="scheme-card">
+                <div class="scheme-icon green">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <div>
+                    <h3>Free Notebooks</h3>
+                    <span class="tag">By: NGOs</span>
+                </div>
+            </div>
+
+            <div class="scheme-card">
+                <div class="scheme-icon blue">
+                    <i class="fas fa-school"></i>
+                </div>
+                <div>
+                    <h3>Free School Bags</h3>
+                    <span class="tag">By: NGOs</span>
+                </div>
+            </div>
+
+            <div class="scheme-card">
+                <div class="scheme-icon purple">
+                    <i class="fas fa-running"></i>
+                </div>
+                <div>
+                    <h3>Track Suits</h3>
+                    <span class="tag">By: NGOs</span>
+                </div>
+            </div>
+
+            <div class="scheme-card">
+                <div class="scheme-icon teal">
+                    <i class="fas fa-bus"></i>
+                </div>
+                <div>
+                    <h3>Annual School Tour</h3>
+                    <span class="tag">By: NGOs + Others</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- ================= CHATBOT ================= -->
+
+    <!-- Chatbot Logo -->
+    <div id="chat-logo">
+        <img src="images/Chatbot.jpg" alt="School Logo">
+    </div>
+
+    <!-- Chat Window -->
+    <div id="chat-container">
+
+        <div id="chat-header">
+            🎓 School AI Assistant
+            <span id="chat-close">✖</span>
+        </div>
+
+        <div id="chat-messages">
+            <div class="bot-message">
+                Hello 👋<br>
+                Welcome to Government Higher Primary School, Kambipura.<br>
+                How can I help you?
+            </div>
+        </div>
+
+        <div id="chat-input-area">
+            <div id="chat-input-row">
+                <input type="text" id="chat-input" placeholder="Ask anything about school...">
+                <button id="chat-send">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <!-- Footer -->
+    <div id="footer"></div>
+    <script src="include.js"></script>
+    <script>
+        // MOBILE MENU TOGGLE
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const menuToggle = document.getElementById("menuToggle");
+            const navMenu = document.getElementById("navMenu");
+
+            if (menuToggle) {
+                menuToggle.addEventListener("click", function () {
+                    navMenu.classList.toggle("active");
+                });
+            }
+
+        });
+    </script>
+
+
+    <!-- Chatbot JS -->
+    <script src="chatbot.js"></script>
+
+</body>
+
+</html>

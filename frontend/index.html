@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>GHPS Kambipura</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="index.css">
+
+    <!-- Chatbot CSS -->
+    <link rel="stylesheet" href="chatbot.css">
+</head>
+
+<body>
+    <!-- ================= NAVBAR ================= -->
+    <header class="navbar">
+        <div class="nav-container">
+
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="logo-text">
+                    <h3>GHPS Kambipura</h3>
+                </div>
+            </div>
+
+            <!-- MOBILE MENU ICON -->
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+
+            <nav id="navMenu">
+                <a class="active" href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="facilities.html">Facilities</a>
+                <a href="schemes.html">Schemes</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+
+        </div>
+    </header>
+
+
+
+    <!-- ================= HERO ================= -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+            <span class="est">EST. 1994</span>
+
+            <h1>
+                Government <br>Higher <br>
+                Primary School
+            </h1>
+
+            <p>
+                Empowering the future generation of Kambipura with quality
+                education, holistic growth, and strong values.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="about.html" class="btn-primary">About Us</a>
+                <a href="contact.html" class="btn-outline">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FEATURES ================= -->
+    <section class="features">
+
+        <div class="feature-card">
+            <div class="icon blue-bg">
+                <i class="fas fa-book-open"></i>
+            </div>
+            <h3>Grade 1 to 7</h3>
+            <p>
+                Comprehensive primary education following the state curriculum
+                with focus on Kannada and English.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon green-bg">
+                <i class="fas fa-user-graduate"></i>
+            </div>
+            <h3>Experienced Staff</h3>
+            <p>
+                5 permanent teachers and 1 guest teacher dedicated
+                to nurturing every child's potential.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon orange-bg">
+                <i class="fas fa-trophy"></i>
+            </div>
+            <h3>Student Benefits</h3>
+            <p>
+                Free mid-day meals, uniforms, textbooks, and health
+                supplements provided by Govt & NGOs.
+            </p>
+        </div>
+
+    </section>
+
+    <!-- ================= CAMPUS ================= -->
+    <section class="campus-section">
+
+        <div class="campus-left">
+
+            <span class="section-label">OUR CAMPUS</span>
+
+            <h2>A Learning Environment Designed for Growth</h2>
+
+            <p class="campus-description">
+                Located in the peaceful surroundings of Kambipura, our school provides a safe,
+                nurturing and stimulating environment for children.
+            </p>
+
+            <a href="facilities.html" class="campus-feature">
+                <div class="arrow-circle blue-circle">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                <div>
+                    <h4>Modern Facilities</h4>
+                    <p>Classrooms, Library, and Playground</p>
+                </div>
+            </a>
+
+            <a href="schemes.html" class="campus-feature">
+                <div class="arrow-circle green-circle">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                <div>
+                    <h4>Government Schemes</h4>
+                    <p>Free Uniforms, Meals & Textbooks</p>
+                </div>
+            </a>
+
+        </div>
+
+        <div class="campus-right">
+
+            <div class="stat-card white-card">
+                <h3>30+</h3>
+                <p>Years of Excellence</p>
+            </div>
+
+            <div class="stat-card blue-card">
+                <p class="small-text">Classes</p>
+                <h3>Grade 1 – 7</h3>
+            </div>
+
+            <div class="stat-card dark-card">
+                <p>Anganwadi</p>
+                <h3>On Campus</h3>
+            </div>
+
+            <div class="stat-card green-card">
+                <h3>10+</h3>
+                <p>Welfare Schemes</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ================= CTA ================= -->
+    <section class="cta">
+        <h2>Visit Our Campus Today</h2>
+        <p>Experience the vibrant learning atmosphere at GHPS Kambipura.</p>
+        <a href="contact.html" class="cta-btn">Get in Touch</a>
+    </section>
+
+    <!-- ================= CHATBOT ================= -->
+
+    <!-- Chatbot Logo -->
+    <div id="chat-logo">
+        <img src="images/Chatbot.jpg" alt="School Logo">
+    </div>
+
+    <!-- Chat Window -->
+    <div id="chat-container">
+
+        <div id="chat-header">
+            🎓 School AI Assistant
+            <span id="chat-close">✖</span>
+        </div>
+
+        <div id="chat-messages">
+            <div class="bot-message">
+                Hello 👋<br>
+                Welcome to Government Higher Primary School, Kambipura.<br>
+                How can I help you?
+            </div>
+        </div>
+
+        <div id="chat-input-area">
+            <div id="chat-input-row">
+                <input type="text" id="chat-input" placeholder="Ask anything about school...">
+                <button id="chat-send">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JS -->
+    <script src="script.js"></script>
+    <script src="chatbot.js"></script>
+
+    <div id="footer"></div>
+    <script src="include.js"></script>
+    <script>
+        function toggleMenu() {
+            document.getElementById("navMenu").classList.toggle("mobile-open");
+        }
+    </script>
+
+</body>
+
+</html>
