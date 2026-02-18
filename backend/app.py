@@ -1,22 +1,22 @@
 from flask import Flask, request, jsonify
-from flask_mail import Mail, Message
 from flask_cors import CORS
 from pymongo import MongoClient
 from groq import Groq
 from dotenv import load_dotenv
+import resend
 import os
-import threading
 
 # ================== LOAD ENV ==================
 load_dotenv()
 
 app = Flask(__name__)
-
-# Enable global CORS
-CORS(app, resources={r"/*": {"origins": "*"}})
+CORS(app)
 
 # ================== GROQ ==================
 groq_client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+
+# ================== RESEND ==================
+resend.api_key = os.getenv("RESEND_API_KEY")
 
 # ================== MONGODB ==================
 enquiries = None
@@ -26,54 +26,18 @@ try:
         os.getenv("MONGO_URI"),
         serverSelectionTimeoutMS=5000
     )
-
     client.server_info()
     db = client["schoolDB"]
     enquiries = db["enquiries"]
-
     print("MongoDB Connected ✅")
 
 except Exception as e:
     print("MongoDB Connection Failed ❌", e)
 
-# ================== MAIL ==================
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = os.getenv("MAIL_USERNAME")
-app.config['MAIL_PASSWORD'] = os.getenv("MAIL_PASSWORD")
-
-mail = Mail(app)
-
 # ================== HOME ==================
 @app.route('/')
 def home():
     return "Backend Running ✅"
-
-# ================== BACKGROUND EMAIL ==================
-def send_email_async(parent, student, phone, class_interest, message):
-    try:
-        with app.app_context():
-            msg = Message(
-                subject="New Admission Enquiry",
-                sender=app.config['MAIL_USERNAME'],
-               recipients=["noelsabu25@gmail.com"]
-            )
-
-            msg.body = f"""
-New Enquiry Received
-
-Parent: {parent}
-Student: {student}
-Phone: {phone}
-Class: {class_interest}
-Message: {message}
-"""
-            mail.send(msg)
-            print("Email Sent ✅")
-
-    except Exception as e:
-        print("Email Failed ❌", e)
 
 # ================== ENQUIRY ==================
 @app.route('/submit-enquiry', methods=['POST'])
@@ -88,7 +52,7 @@ def submit_enquiry():
         message = data.get('message')
 
         # Save to MongoDB
-        if enquiries is not None:
+        if enquiries:
             enquiries.insert_one({
                 "parent": parent,
                 "student": student,
@@ -97,11 +61,20 @@ def submit_enquiry():
                 "message": message
             })
 
-        # Send email in background (SAFE)
-        threading.Thread(
-            target=send_email_async,
-            args=(parent, student, phone, class_interest, message)
-        ).start()
+        # Send Email via Resend
+        resend.Emails.send({
+            "from": "onboarding@resend.dev",
+            "to": ["noelsabu25@gmail.com"],
+            "subject": "New Admission Enquiry",
+            "html": f"""
+                <h3>New Enquiry Received</h3>
+                <p><b>Parent:</b> {parent}</p>
+                <p><b>Student:</b> {student}</p>
+                <p><b>Phone:</b> {phone}</p>
+                <p><b>Class:</b> {class_interest}</p>
+                <p><b>Message:</b> {message}</p>
+            """
+        })
 
         return jsonify({"status": "success"})
 
@@ -140,4 +113,3 @@ Keep answers short and polite.
 # ================== RUN ==================
 if __name__ == "__main__":
     app.run()
-
