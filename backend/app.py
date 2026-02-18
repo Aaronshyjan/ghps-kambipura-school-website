@@ -5,6 +5,7 @@ from pymongo import MongoClient
 from groq import Groq
 from dotenv import load_dotenv
 import os
+import threading
 
 # ================== LOAD ENV ==================
 load_dotenv()
@@ -49,30 +50,10 @@ mail = Mail(app)
 def home():
     return "Backend Running ✅"
 
-# ================== ENQUIRY ==================
-@app.route('/submit-enquiry', methods=['POST'])
-def submit_enquiry():
+# ================== BACKGROUND EMAIL ==================
+def send_email_async(parent, student, phone, class_interest, message):
     try:
-        data = request.json   # 🔥 accept JSON from frontend
-
-        parent = data.get('parent_name')
-        student = data.get('student_name')
-        phone = data.get('phone')
-        class_interest = data.get('class_interest')
-        message = data.get('message')
-
-        # Save to DB
-        if enquiries is not None:
-            enquiries.insert_one({
-                "parent": parent,
-                "student": student,
-                "phone": phone,
-                "class_interest": class_interest,
-                "message": message
-            })
-
-        # Send Email
-        try:
+        with app.app_context():
             msg = Message(
                 subject="New Admission Enquiry",
                 sender=app.config['MAIL_USERNAME'],
@@ -91,8 +72,36 @@ Message: {message}
             mail.send(msg)
             print("Email Sent ✅")
 
-        except Exception as e:
-            print("Email Failed ❌", e)
+    except Exception as e:
+        print("Email Failed ❌", e)
+
+# ================== ENQUIRY ==================
+@app.route('/submit-enquiry', methods=['POST'])
+def submit_enquiry():
+    try:
+        data = request.json
+
+        parent = data.get('parent_name')
+        student = data.get('student_name')
+        phone = data.get('phone')
+        class_interest = data.get('class_interest')
+        message = data.get('message')
+
+        # Save to MongoDB
+        if enquiries is not None:
+            enquiries.insert_one({
+                "parent": parent,
+                "student": student,
+                "phone": phone,
+                "class_interest": class_interest,
+                "message": message
+            })
+
+        # Send email in background (SAFE)
+        threading.Thread(
+            target=send_email_async,
+            args=(parent, student, phone, class_interest, message)
+        ).start()
 
         return jsonify({"status": "success"})
 
