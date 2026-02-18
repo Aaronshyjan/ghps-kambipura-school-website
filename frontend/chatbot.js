@@ -31,7 +31,7 @@ async function sendMessage() {
 
     try {
 
-        const response = await fetch("http://127.0.0.1:5000/chat", {
+        const response = await fetch("https://ghpskambipura.onrender.com", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -46,7 +46,8 @@ async function sendMessage() {
 
     } catch (error) {
         removeTyping();
-        addBotMessage("⚠️ AI not available right now.");
+        addBotMessage("⚠️ Server not responding.");
+        console.error(error);
     }
 }
 
