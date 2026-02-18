@@ -64,7 +64,7 @@ def submit_enquiry():
         # Send Email via Resend
         resend.Emails.send({
             "from": "onboarding@resend.dev",
-            "to": ["noelsabu25@gmail.com"],
+            "to": ["aaronshyjan2019@gmail.com"],
             "subject": "New Admission Enquiry",
             "html": f"""
                 <h3>New Enquiry Received</h3>
@@ -113,3 +113,4 @@ Keep answers short and polite.
 # ================== RUN ==================
 if __name__ == "__main__":
     app.run()
+
