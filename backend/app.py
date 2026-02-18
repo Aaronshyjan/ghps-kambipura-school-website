@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, make_response
+from flask import Flask, request, jsonify
 from flask_mail import Mail, Message
 from flask_cors import CORS
 from pymongo import MongoClient
@@ -6,11 +6,13 @@ from groq import Groq
 from dotenv import load_dotenv
 import os
 
-# Load environment variables
+# ================== LOAD ENV ==================
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app)
+
+# Enable global CORS
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 # ================== GROQ ==================
 groq_client = Groq(api_key=os.getenv("GROQ_API_KEY"))
@@ -24,8 +26,7 @@ try:
         serverSelectionTimeoutMS=5000
     )
 
-    client.server_info()  # test connection
-
+    client.server_info()
     db = client["schoolDB"]
     enquiries = db["enquiries"]
 
@@ -52,11 +53,13 @@ def home():
 @app.route('/submit-enquiry', methods=['POST'])
 def submit_enquiry():
     try:
-        parent = request.form.get('parent_name')
-        student = request.form.get('student_name')
-        phone = request.form.get('phone')
-        class_interest = request.form.get('class_interest')
-        message = request.form.get('message')
+        data = request.json   # 🔥 accept JSON from frontend
+
+        parent = data.get('parent_name')
+        student = data.get('student_name')
+        phone = data.get('phone')
+        class_interest = data.get('class_interest')
+        message = data.get('message')
 
         # Save to DB
         if enquiries is not None:
@@ -69,13 +72,14 @@ def submit_enquiry():
             })
 
         # Send Email
-        msg = Message(
-            subject="New Admission Enquiry",
-            sender=app.config['MAIL_USERNAME'],
-            recipients=["noelsabu25@gmail.com"]
-        )
+        try:
+            msg = Message(
+                subject="New Admission Enquiry",
+                sender=app.config['MAIL_USERNAME'],
+                recipients=[os.getenv("MAIL_USERNAME")]
+            )
 
-        msg.body = f"""
+            msg.body = f"""
 New Enquiry Received
 
 Parent: {parent}
@@ -84,30 +88,21 @@ Phone: {phone}
 Class: {class_interest}
 Message: {message}
 """
-
-        try:
             mail.send(msg)
             print("Email Sent ✅")
+
         except Exception as e:
             print("Email Failed ❌", e)
 
-        return "success"
+        return jsonify({"status": "success"})
 
     except Exception as e:
         print("Error:", e)
-        return "error"
+        return jsonify({"status": "error"})
 
 # ================== CHATBOT ==================
-@app.route('/chat', methods=['POST','OPTIONS'])
+@app.route('/chat', methods=['POST'])
 def chat():
-
-    if request.method == "OPTIONS":
-        response = make_response()
-        response.headers.add("Access-Control-Allow-Origin", "*")
-        response.headers.add("Access-Control-Allow-Headers", "Content-Type")
-        response.headers.add("Access-Control-Allow-Methods", "POST")
-        return response
-
     try:
         user_message = request.json.get("message")
 
@@ -117,27 +112,22 @@ def chat():
                 {
                     "role": "system",
                     "content": """
-                    You are a helpful AI assistant for Government Higher Primary School, Kambipura.
-                    Answer only about admissions, facilities, timings, teachers, location, schemes.
-                    Keep answers short and polite.
-                    """
+You are a helpful AI assistant for Government Higher Primary School, Kambipura.
+Answer only about admissions, facilities, timings, teachers, location, schemes.
+Keep answers short and polite.
+"""
                 },
                 {"role": "user", "content": user_message}
             ]
         )
 
         reply = response.choices[0].message.content
-
-        res = jsonify({"reply": reply})
-        res.headers.add("Access-Control-Allow-Origin", "*")
-        return res
+        return jsonify({"reply": reply})
 
     except Exception as e:
         print("Chat Error:", e)
-        res = jsonify({"reply": "AI not available right now."})
-        res.headers.add("Access-Control-Allow-Origin", "*")
-        return res
+        return jsonify({"reply": "AI not available right now."})
 
 # ================== RUN ==================
 if __name__ == "__main__":
-   app.run(debug=True, host="0.0.0.0", port=5000)
+    app.run()
