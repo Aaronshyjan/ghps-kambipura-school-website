@@ -52,14 +52,15 @@ def submit_enquiry():
         message = data.get('message')
 
         # Save to MongoDB
-        if enquiries:
-            enquiries.insert_one({
-                "parent": parent,
-                "student": student,
-                "phone": phone,
-                "class_interest": class_interest,
-                "message": message
-            })
+if enquiries is not None:
+    enquiries.insert_one({
+        "parent": parent,
+        "student": student,
+        "phone": phone,
+        "class_interest": class_interest,
+        "message": message
+    })
+
 
         # Send Email via Resend
         resend.Emails.send({
@@ -113,3 +114,4 @@ Keep answers short and polite.
 # ================== RUN ==================
 if __name__ == "__main__":
     app.run()
+
