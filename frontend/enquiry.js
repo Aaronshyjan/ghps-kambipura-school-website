@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const message = document.getElementById("message").value;
 
         try {
-            const response = await fetch("https://ghpskambipura.onrender.com", {
+            const response = await fetch("https://ghpskambipura.onrender.com/submit-enquiry", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -59,3 +59,4 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+
