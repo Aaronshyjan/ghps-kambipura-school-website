@@ -31,7 +31,7 @@ async function sendMessage() {
 
     try {
 
-        const response = await fetch("https://ghpskambipura.onrender.com", {
+        const response = await ffetch("https://ghpskambipura.onrender.com/chat", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -76,3 +76,4 @@ function removeTyping() {
     let typing = document.querySelector(".typing");
     if (typing) typing.remove();
 }
+
