@@ -57,7 +57,7 @@ def send_email_async(parent, student, phone, class_interest, message):
             msg = Message(
                 subject="New Admission Enquiry",
                 sender=app.config['MAIL_USERNAME'],
-                recipients=[os.getenv("MAIL_USERNAME")]
+               recipients=["noelsabu25@gmail.com"]
             )
 
             msg.body = f"""
@@ -140,3 +140,4 @@ Keep answers short and polite.
 # ================== RUN ==================
 if __name__ == "__main__":
     app.run()
+
